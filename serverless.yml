@@ -20,9 +20,3 @@ functions:
           path: graphql
           method: post
           cors: true
-  playground:
-    handler: index.handler
-    events:
-      - http:
-          path: playground
-          method: get

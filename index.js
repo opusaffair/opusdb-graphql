@@ -1,9 +1,12 @@
 import express from "express";
 import serverless from "serverless-http";
 import graphiql from "graphql-playground-middleware-express";
-import { ApolloServer } from "apollo-server-express";
-
-import typeDefs from "./typeDefs";
+import { ApolloServer, gql } from "apollo-server-express";
+const typeDefs = gql`
+  type Query {
+    hello: String
+  }
+`;
 const resolvers = {
   Query: {
     hello: () => "world"
