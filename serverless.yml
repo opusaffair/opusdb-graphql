@@ -11,12 +11,19 @@ custom:
 provider:
   name: aws
   runtime: nodejs8.10
-  stage: dev
+  stage: ${opt:stage,'dev'}
+  environment: ${file(secrets.yml):${self:provider.stage}}
 functions:
   graphql:
-    handler: index.handler
+    handler: src/index.handler
     events:
       - http:
           path: graphql
           method: post
           cors: true
+  playground:
+    handler: src/index.handler
+    events:
+      - http:
+          path: playground
+          method: get
