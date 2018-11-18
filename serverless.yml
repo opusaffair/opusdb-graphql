@@ -1,5 +1,5 @@
-service: serverless-graphql
-app: myapp-dev
+service: opusdb-graphql
+app: opus-graphql
 tenant: gtwright
 plugins:
   - serverless-webpack
