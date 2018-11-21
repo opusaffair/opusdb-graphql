@@ -28,6 +28,12 @@ const typeDefs = gql`
     ): [Event]
   }
 
+  type Org {
+    opus_id: ID!
+    name: String!
+    slug: String!
+  }
+
   type Event {
     opus_id: ID!
     title: String
@@ -53,6 +59,8 @@ const typeDefs = gql`
     rsvp_only: Boolean
     view_count: String
     pagerank: Float
+    orgs: [Org]
+    # degree: Int @cypher(statement: "RETURN SIZE((this)-->())")
     involved (skip: Int = 0, limit: Int = 10): [User]
   }
 

@@ -1,5 +1,5 @@
 {
-  "name": "npm",
+  "name": "calendar-graphql-sls",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -17,11 +17,12 @@
   },
   "devDependencies": {
     "babel-loader": "^8.0.4",
+    "serverless-plugin-warmup": "^4.2.0-rc.1",
     "webpack": "^4.25.1",
     "webpack-node-externals": "^1.7.2"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "sls offline -s local --P 4000"
   },
   "author": "",
   "license": "ISC"

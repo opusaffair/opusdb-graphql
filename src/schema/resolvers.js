@@ -7,8 +7,11 @@ const aMonthAgo = x => today() - (x || 1) * 30 * 24 * 60 * 60;
 
 const resolvers = {
   Query: {
+    event(object, params, ctx, resolveInfo) {
+      return neo4jgraphql(object, params, ctx, resolveInfo);
+    },
     hello: () => `hello world`,
-    event: neo4jgraphql,
+    // event: neo4jgraphql,
     events(_, params, ctx) {
       let session = ctx.driver.session();
       params.start = params.start || today();
@@ -38,7 +41,7 @@ const resolvers = {
       params.opus_id = obj.opus_id;
       console.log(params);
       let query = `
-            MATCH (event:Event)
+            MATCH (this)-[r:INVOLVED_IN]-(user:User)
             WHERE event.opus_id = $opus_id
             MATCH (event)-[r:INVOLVED_IN]-(user:User)
             RETURN user

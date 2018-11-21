@@ -3,6 +3,7 @@ import serverless from "serverless-http";
 import graphiql from "graphql-playground-middleware-express";
 import { ApolloServer, makeExecutableSchema } from "apollo-server-express";
 import { v1 as neo4j } from "neo4j-driver";
+import { augmentSchema, makeAugmentedSchema } from "neo4j-graphql-js";
 import typeDefs from "./schema/typeDefs";
 import resolvers from "./schema/resolvers";
 
@@ -21,6 +22,11 @@ const schema = makeExecutableSchema({
   }
 });
 
+// const augmentedSchema = augmentSchema(schema, {
+//   query: true, // default
+//   mutation: false
+// });
+
 const server = new ApolloServer({
   schema,
   path: "/graphql",
@@ -36,6 +42,5 @@ const server = new ApolloServer({
 });
 server.applyMiddleware({ app });
 app.get("/playground", graphiql({ endpoint: "/graphql" }));
-console.log(process.env.DEMO);
 const handler = serverless(app);
 export { handler };
