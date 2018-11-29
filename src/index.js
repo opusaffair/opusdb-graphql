@@ -22,9 +22,12 @@ const schema = makeExecutableSchema({
   }
 });
 
-// const augmentedSchema = augmentSchema(schema, {
-//   query: true, // default
-//   mutation: false
+// const augmentedSchema = makeAugmentedSchema({
+//   schema,
+//   config: {
+//     query: true, // default
+//     mutation: false
+//   }
 // });
 
 const server = new ApolloServer({

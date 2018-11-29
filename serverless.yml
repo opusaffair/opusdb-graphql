@@ -42,4 +42,6 @@ functions:
   cron:
     handler: src/cron.run
     events:
-      - schedule: rate(1 hour)
+      - schedule: 
+          rate: rate(1 hour)
+          enabled: ${env:CRON}

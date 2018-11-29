@@ -11,7 +11,6 @@ const resolvers = {
       return neo4jgraphql(object, params, ctx, resolveInfo);
     },
     hello: () => `hello world`,
-    // event: neo4jgraphql,
     events(_, params, ctx) {
       let session = ctx.driver.session();
       params.start = params.start || today();
@@ -19,8 +18,8 @@ const resolvers = {
       console.log(params);
       let query = `
         Match (v:Venue)
-        WITH v,point({latitude: $lat, longitude: $lng}) as boston
-        WHERE distance(boston,point({latitude:v.latitude, longitude: v.longitude})) < $radius
+        WITH v,point({latitude: $lat, longitude: $lng}) as loc
+        WHERE distance(loc,point({latitude:v.latitude, longitude: v.longitude})) < $radius
         MATCH (v)--(event:Event)
         WHERE event.end_datetime >= $start AND event.start_datetime <= $end
         AND event.title contains $title AND event.published = True
@@ -41,16 +40,61 @@ const resolvers = {
       params.opus_id = obj.opus_id;
       console.log(params);
       let query = `
-            MATCH (this)-[r:INVOLVED_IN]-(user:User)
+            MATCH (event:Event)-[r:INVOLVED_IN]-(user:User)
             WHERE event.opus_id = $opus_id
-            MATCH (event)-[r:INVOLVED_IN]-(user:User)
-            RETURN user
+            // MATCH (event)-[r:INVOLVED_IN]-(user:User)
+            RETURN distinct(user) as user
             SKIP $skip
             LIMIT $limit
           `;
       return session.run(query, params).then(result => {
         return result.records.map(record => {
           return record.get("user").properties;
+        });
+      });
+    },
+    orgs: (obj, params, ctx) => {
+      let session = ctx.driver.session();
+      params.opus_id = obj.opus_id;
+      console.log(params);
+      let query = `
+            MATCH (event:Event)<-[r:ORGANIZES]-(org:Org)
+            WHERE event.opus_id = $opus_id
+            RETURN distinct(org) as org
+          `;
+      return session.run(query, params).then(result => {
+        return result.records.map(record => {
+          return record.get("org").properties;
+        });
+      });
+    },
+    org_names: (obj, params, ctx) => {
+      let session = ctx.driver.session();
+      params.opus_id = obj.opus_id;
+      let query = `
+            MATCH (event:Event)<-[r:ORGANIZES]-(org:Org)
+            WHERE event.opus_id = $opus_id
+            RETURN distinct(org.name) as org
+          `;
+      return session.run(query, params).then(result => {
+        let results = result.records.map(record => {
+          return record.get("org").properties;
+        });
+        return results.join(", ").replace(/, ([^,]*)$/, " + $1");
+      });
+    },
+    venues: (obj, params, ctx) => {
+      let session = ctx.driver.session();
+      params.opus_id = obj.opus_id;
+      let query = `
+            Match (event:Event)-[r:HELD_AT]->(venue:Venue)
+            WHERE event.opus_id = $opus_id
+            RETURN distinct(venue) as venue
+          `;
+      return session.run(query, params).then(result => {
+        return result.records.map(record => {
+          let venue = record.get("venue").properties;
+          return venue;
         });
       });
     }

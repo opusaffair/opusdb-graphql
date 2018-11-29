@@ -34,7 +34,21 @@ const typeDefs = gql`
     slug: String!
   }
 
+  type Venue {
+    opus_id: ID!
+    name: String!
+    slug: String!
+    address: String
+    city: String
+    country: String
+    latitude: Float
+    longitude: Float
+    state: String
+    zip_code: String
+  }
+
   type Event {
+    _id: ID!
     opus_id: ID!
     title: String
     slug: String!
@@ -60,9 +74,36 @@ const typeDefs = gql`
     view_count: String
     pagerank: Float
     orgs: [Org]
+    org_names: String
+    venues: [Venue]
     # degree: Int @cypher(statement: "RETURN SIZE((this)-->())")
     involved (skip: Int = 0, limit: Int = 10): [User]
   }
+
+  # enum _EventOrdering {
+  #   title_asc
+  #   title_desc
+  # }
+
+  # enum _OrgOrdering {
+  #   name_asc
+  #   name_desc
+  # }
+
+  # enum _VenueOrdering {
+  #   name_asc
+  #   name_desc
+  # }
+
+  #   enum _TagOrdering {
+  #   name_asc
+  #   name_desc
+  # }
+
+  #   enum _UserOrdering {
+  #   username_asc
+  #   username_desc
+  # }
 
   type Query {
     hello: String

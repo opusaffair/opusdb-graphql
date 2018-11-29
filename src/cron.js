@@ -8,7 +8,7 @@ module.exports.run = (event, context) => {
     query: "{events(limit: 1) {title}}"
   };
   console.log(`Your cron function "${context.functionName}" ran at ${time}`);
-  fetch("https://g72do7n65f.execute-api.us-east-1.amazonaws.com/dev/graphql", {
+  fetch("https://31l4zbl2rd.execute-api.us-east-1.amazonaws.com/prod/graphql", {
     method: "POST",
     body: JSON.stringify(body),
     headers: { "Content-Type": "application/json" }
