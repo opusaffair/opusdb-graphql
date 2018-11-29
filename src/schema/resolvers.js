@@ -74,13 +74,16 @@ const resolvers = {
       let query = `
             MATCH (event:Event)<-[r:ORGANIZES]-(org:Org)
             WHERE event.opus_id = $opus_id
-            RETURN distinct(org.name) as org
+            RETURN distinct(org) as org
           `;
       return session.run(query, params).then(result => {
         let results = result.records.map(record => {
-          return record.get("org").properties;
+          return record.get("org").properties["name"];
         });
-        return results.join(", ").replace(/, ([^,]*)$/, " + $1");
+        console.log(results);
+        results = results.join(", ").replace(/, ([^,]*)$/, " & $1");
+        console.log(results);
+        return results;
       });
     },
     venues: (obj, params, ctx) => {
