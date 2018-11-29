@@ -7,8 +7,20 @@ const aMonthAgo = x => today() - (x || 1) * 30 * 24 * 60 * 60;
 
 const resolvers = {
   Query: {
-    event(object, params, ctx, resolveInfo) {
-      return neo4jgraphql(object, params, ctx, resolveInfo);
+    event(_, params, ctx) {
+      let session = ctx.driver.session();
+      let query = `
+        MATCH (event:Event)
+        WHERE event.slug CONTAINS $slug AND event.opus_id CONTAINS $opus_id
+        RETURN event
+        `;
+      return session.run(query, params).then(result => {
+        console.log(result);
+        let results = result.records.map(record => {
+          return record.get("event").properties;
+        });
+        return results[0];
+      });
     },
     hello: () => `hello world`,
     events(_, params, ctx) {
@@ -75,14 +87,13 @@ const resolvers = {
             MATCH (event:Event)<-[r:ORGANIZES]-(org:Org)
             WHERE event.opus_id = $opus_id
             RETURN distinct(org) as org
+            ORDER BY org.name DESC
           `;
       return session.run(query, params).then(result => {
         let results = result.records.map(record => {
           return record.get("org").properties["name"];
         });
-        console.log(results);
         results = results.join(", ").replace(/, ([^,]*)$/, " & $1");
-        console.log(results);
         return results;
       });
     },

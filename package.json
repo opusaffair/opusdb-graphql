@@ -22,7 +22,8 @@
     "webpack-node-externals": "^1.7.2"
   },
   "scripts": {
-    "dev": "sls offline -s local --P 4000"
+    "dev": "sls offline -s local --P 4000",
+    "deploy-prod": "sls deploy --stage=prod"
   },
   "author": "",
   "license": "ISC"

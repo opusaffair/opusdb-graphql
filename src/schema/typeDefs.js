@@ -117,7 +117,7 @@ const typeDefs = gql`
       lng: Float = ${lng},
       radius: Float = ${radius}
     ): [Event]
-    event(opus_id: ID, title: String, slug: String): Event
+    event(slug: String ="", opus_id: String=""): Event
   }
 `;
 
