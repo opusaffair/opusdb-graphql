@@ -17,15 +17,6 @@ const typeDefs = gql`
     opus_id: ID!
     name: String
     slug: String!
-    eventsUpcoming(
-      limit: Int = 12,
-      skip: Int = 0,
-      start: Float,
-      end: Float,
-      lat: Float = ${lat},
-      lng: Float = ${lng},
-      radius: Float = ${radius}
-    ): [Event]
   }
 
   type Org {
@@ -53,6 +44,7 @@ const typeDefs = gql`
     title: String
     slug: String!
     organizer_desc: String
+    supertitle_creative: String
     opus_desc: String
     created_at: String
     updated_at: String
@@ -76,6 +68,7 @@ const typeDefs = gql`
     orgs: [Org]
     org_names: String
     venues: [Venue]
+    tags: [Tag]
     # degree: Int @cypher(statement: "RETURN SIZE((this)-->())")
     involved (skip: Int = 0, limit: Int = 10): [User]
   }

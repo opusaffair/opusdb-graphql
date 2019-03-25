@@ -111,6 +111,21 @@ const resolvers = {
           return venue;
         });
       });
+    },
+    tags: (obj, params, ctx) => {
+      let session = ctx.driver.session();
+      params.opus_id = obj.opus_id;
+      let query = `
+            Match (event:Event)<--(tag:Tag)
+            WHERE event.opus_id = $opus_id
+            RETURN distinct(tag) as tag
+          `;
+      return session.run(query, params).then(result => {
+        return result.records.map(record => {
+          let tag = record.get("tag").properties;
+          return tag;
+        });
+      });
     }
   }
 };
