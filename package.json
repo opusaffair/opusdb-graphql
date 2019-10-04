@@ -13,7 +13,8 @@
     "serverless": "^1.33.1",
     "serverless-http": "^1.8.0",
     "serverless-offline": "^3.31.3",
-    "serverless-webpack": "^5.2.0"
+    "serverless-webpack": "^5.2.0",
+    "snyk": "^1.230.5"
   },
   "devDependencies": {
     "babel-loader": "^8.0.4",
@@ -23,8 +24,11 @@
   },
   "scripts": {
     "dev": "sls offline -s local --P 4000",
-    "deploy-prod": "sls deploy --stage=prod"
+    "deploy-prod": "sls deploy --stage=prod",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "snyk": true
 }
