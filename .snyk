@@ -1,0 +1,70 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.14.1
+ignore: {}
+# patches apply the minimum changes required to fix a vulnerability
+patch:
+  SNYK-JS-LODASH-567746:
+    - neo4j-graphql-js > lodash:
+        patched: '2020-05-01T02:58:52.715Z'
+    - serverless > lodash:
+        patched: '2020-05-01T02:58:52.715Z'
+    - serverless-webpack > lodash:
+        patched: '2020-05-01T02:58:52.715Z'
+    - serverless > @serverless/enterprise-plugin > lodash:
+        patched: '2020-05-01T02:58:52.715Z'
+    - serverless > archiver > lodash:
+        patched: '2020-05-01T02:58:52.715Z'
+    - serverless > inquirer > lodash:
+        patched: '2020-05-01T02:58:52.715Z'
+    - serverless-offline > @babel/register > lodash:
+        patched: '2020-05-01T02:58:52.715Z'
+    - serverless-webpack > archiver > lodash:
+        patched: '2020-05-01T02:58:52.715Z'
+    - serverless > @serverless/components > graphlib > lodash:
+        patched: '2020-05-01T02:58:52.715Z'
+    - serverless > json-refs > graphlib > lodash:
+        patched: '2020-05-01T02:58:52.715Z'
+    - serverless > @serverless/components > prettyoutput > lodash:
+        patched: '2020-05-01T02:58:52.715Z'
+    - serverless > archiver > async > lodash:
+        patched: '2020-05-01T02:58:52.715Z'
+    - serverless-webpack > archiver > async > lodash:
+        patched: '2020-05-01T02:58:52.715Z'
+    - serverless > @serverless/enterprise-plugin > @serverless/event-mocks > lodash:
+        patched: '2020-05-01T02:58:52.715Z'
+    - serverless > archiver > archiver-utils > lodash:
+        patched: '2020-05-01T02:58:52.715Z'
+    - serverless-webpack > archiver > archiver-utils > lodash:
+        patched: '2020-05-01T02:58:52.715Z'
+    - serverless > archiver > zip-stream > lodash:
+        patched: '2020-05-01T02:58:52.715Z'
+    - serverless-webpack > archiver > zip-stream > lodash:
+        patched: '2020-05-01T02:58:52.715Z'
+    - serverless > tabtab > inquirer > lodash:
+        patched: '2020-05-01T02:58:52.715Z'
+    - serverless-offline > @babel/core > @babel/helper-module-transforms > lodash:
+        patched: '2020-05-01T02:58:52.715Z'
+    - serverless > @serverless/cli > @serverless/template > graphlib > lodash:
+        patched: '2020-05-01T02:58:52.715Z'
+    - serverless > @serverless/components > @serverless/inquirer > inquirer > lodash:
+        patched: '2020-05-01T02:58:52.715Z'
+    - serverless > archiver > zip-stream > archiver-utils > lodash:
+        patched: '2020-05-01T02:58:52.715Z'
+    - serverless-webpack > archiver > zip-stream > archiver-utils > lodash:
+        patched: '2020-05-01T02:58:52.715Z'
+    - serverless-offline > @babel/core > @babel/helpers > @babel/traverse > lodash:
+        patched: '2020-05-01T02:58:52.715Z'
+    - serverless-offline > @babel/core > @babel/helper-module-transforms > @babel/helper-replace-supers > @babel/traverse > lodash:
+        patched: '2020-05-01T02:58:52.715Z'
+    - serverless > @serverless/components > @serverless/platform-client-china > @serverless/utils-china > winston > async > lodash:
+        patched: '2020-05-01T02:58:52.715Z'
+    - serverless > @serverless/enterprise-plugin > dependency-tree > precinct > detective-typescript > @typescript-eslint/typescript-estree > lodash:
+        patched: '2020-05-01T02:58:52.715Z'
+    - serverless-offline > @babel/core > @babel/helper-module-transforms > @babel/helper-replace-supers > @babel/traverse > @babel/generator > lodash:
+        patched: '2020-05-01T02:58:52.715Z'
+    - serverless > @serverless/components > @serverless/platform-client-china > @serverless/utils-china > @tencent-sdk/capi > request-promise-native > request-promise-core > lodash:
+        patched: '2020-05-01T02:58:52.715Z'
+    - serverless-offline > @babel/core > @babel/helper-module-transforms > @babel/helper-replace-supers > @babel/traverse > @babel/helper-split-export-declaration > @babel/types > lodash:
+        patched: '2020-05-01T02:58:52.715Z'
+    - serverless-offline > @babel/core > @babel/helper-module-transforms > @babel/helper-replace-supers > @babel/traverse > @babel/helper-function-name > @babel/template > @babel/types > lodash:
+        patched: '2020-05-01T02:58:52.715Z'
